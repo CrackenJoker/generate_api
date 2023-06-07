@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 let dados = `const express = require('express')
 const app = express()
 app.get('/',(req,res)=>{
@@ -9,24 +10,29 @@ app.listen(3000,()=>{
 })
 `
 
-module.exports = class criacao{
-    arquivo(nome_arquivo){
-        if(!fs.existsSync(nome_arquivo)){
-            fs.writeFile(nome_arquivo,dados,resultado=>{
-                if(resultado == "null"){
+// module.exports = 
+class criacao{
+    file(file_name){
+        if(!fs.existsSync(file_name)){
+            fs.writeFile(file_name,dados,result=>{
+                if(result == "null"){
                     console.log("Ocorreu um erro")
                 }else{
-                    console.log(`API ${nome_arquivo} criada com sucesso`)
+                    console.log(`API ${file_name} criada com sucesso`)
                 }
                 console.log("Feito")
              })
         }
     }
 
-    pasta(nome_pasta){
-        if(!fs.existsSync(nome_pasta)){
-            fs.mkdir(nome_pasta,(erro)=>{
+   async folder(folder_name){
+        if(!fs.existsSync(folder_name)){
+            fs.mkdir(folder_name,(erro)=>{
             })
+            await fs.mkdir('./'+folder_name+'/src',(erro)=>{
+
+            })
+            
         }else{
             console.log("Esta API já existe")
         }
@@ -36,3 +42,5 @@ module.exports = class criacao{
 
 
 
+let teste = new criacao
+teste.folder("test")
